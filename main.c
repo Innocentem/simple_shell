@@ -1,9 +1,9 @@
 #include "shell.h"
 
 /**
- * main: point of enterance
- * @ac:  count of argument
- * @av: argument vector
+ * main: checks if my shell is called
+ * @ac - arg count
+ * @av - arg vectr.
  *
  * Return: 1 on error, 0 on success
  */
@@ -38,7 +38,7 @@ int main(int ac, char **av)
 		}
 		info->readfd = fd;
 	}
-	populate_env_list(info);
+	_populate_envlist(info);
 	read_history(info);
 	hsh(info, av);
 	return (EXIT_SUCCESS);

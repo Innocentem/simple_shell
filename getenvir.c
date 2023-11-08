@@ -1,30 +1,31 @@
 #include "shell.h"
 
 /**
- * get_environ - gets or returns the string array of our environ
- * @info:  potential arguments arecontained in the struct
+ * _getenvir: gets/returns the str array of my env't.
+ * @info:  potential args contained in the struct
  *
  * Return: 0 Always
  */
-char **get_environ(info_t *info)
+char **_getenvir(info_t *info)
 {
-	if (!info->environ || info->env_changed)
+	if (!info->envir || info->env_changed)
 	{
-		info->environ = list_to_strings(info->env);
+		info->envir = to_str(info->env);
 		info->env_changed = 0;
 	}
 
-	return (info->environ);
+	return (info->envir);
 }
 
 /**
- * _unsetenv - delete an environment variable
- * @info:  containing potential arguments are contained in struct
+ * unset_env: delete an env'nt variable
+ * @info:  containing args contained in struct.
  *
- *  Return: 10 on not delete, 1 on delete
- * @var:  string environment variable property
+ *  Return: 10 if not del, 1 on delete.
+ * @var:  str env'nt variable property.
  */
-int _unsetenv(info_t *info, char *var)
+
+int unset_env(info_t *info, char *var)
 {
 	list_t *node = info->env;
 	size_t i = 0;
@@ -50,15 +51,15 @@ int _unsetenv(info_t *info, char *var)
 }
 
 /**
- * _setenv -  a new environment variable isinitialized
+ * set_env: new envnt var initialized
  *
- * @info:  potential arguments are contained in structure
+ * @info:  potential args contained in struct.
  *
- * @var: the string environment variable property
- * @value:  string environment variable value
- *  Return:  0 Always
+ * @var - str env'nt variable property
+ * @value:  str env'nt variable value.
+ *  Return:  0
  */
-int _setenv(info_t *info, char *var, char *value)
+int set_env(info_t *info, char *var, char *value)
 {
 	char *buf = NULL;
 	list_t *node;
@@ -86,7 +87,7 @@ int _setenv(info_t *info, char *var, char *value)
 		}
 		node = node->next;
 	}
-	add_node_end(&(info->env), buf, 0);
+	_node_endplus(&(info->env), buf, 0);
 	free(buf);
 	info->env_changed = 1;
 	return (0);

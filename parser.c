@@ -24,11 +24,11 @@ int is_cmd(info_t *info, char *path)
 }
 
 /**
- * dup_chars -  chars duplication
- * @pathstr: string path
- * @start: start of index
- * @stop: stop of index.
- * Return: points to a new buffer
+ * dup_chars: chars duplication
+ * @pathstr - string path
+ * @start - start of index
+ * @stop - stop of index.
+ * Return: points to new buffer
  */
 
 char *dup_chars(char *pathstr, int start, int stop)
@@ -49,7 +49,7 @@ char *dup_chars(char *pathstr, int start, int stop)
  * @pathstr:  string PATH
  * @cmd: the command  finder
  *
- * Return: full  command path if found or NULL
+ * Return: full  command path if found or NULL.
  */
 char *find_path(info_t *info, char *pathstr, char *cmd)
 {

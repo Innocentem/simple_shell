@@ -147,7 +147,7 @@ int _putchar(char);
 /* toem_exits.c */
 char *_strncpy(char *, char *, int);
 char *_strncat(char *, char *, int);
-char *_strchr(char *, char);
+char *str_chr(char *, char);
 
 /* toem_tokenizer.c */
 char **strtow(char *, char *);
@@ -189,21 +189,21 @@ int _getline(info_t *, char **, size_t *);
 void sigintHandler(int);
 
 /* toem_getinfo.c */
-void clear_info(info_t *);
-void set_info(info_t *, char **);
-void free_info(info_t *, int);
+void info_clear(info_t *);
+void info_set(info_t *, char **);
+void info_free(info_t *, int);
 
-/* toem_environ.c */
-char *_getenv(info_t *, const char *);
-int _myenv(info_t *);
-int _mysetenv(info_t *);
-int _myunsetenv(info_t *);
-int populate_env_list(info_t *);
+/* toem_envir.c */
+char *get_envir(info_t *, const char *);
+int my_envir(info_t *);
+int my_setenv(info_t *);
+int my_unsetenv(info_t *);
+int _populate_envlist(info_t *);
 
-/* toem_getenv.c */
-char **get_environ(info_t *);
-int _unsetenv(info_t *, char *);
-int _setenv(info_t *, char *, char *);
+/* toem_getenvir.c */
+char **_getenvir(info_t *);
+int unset_env(info_t *, char *);
+int set_env(info_t *, char *, char *);
 
 /* toem_history.c */
 char *get_history_file(info_t *info);
