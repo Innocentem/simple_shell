@@ -18,7 +18,6 @@ void _laput(char *str)
 		i++;
 	}
 										}
-}
 
 /**
 * laputchar - writes the character c to stderr
@@ -60,11 +59,13 @@ int put_a(char c, int fd)
 	{
 		write(fd, buf, i);
 		i = 0;
-	}											}
+	}
+}
 	if (c != BUF_FLUSH)
+	{
 		buf[i++] = c;
 		return (1);
-}
+	}
 
 /**
  *  * la_puta: prints an input string
