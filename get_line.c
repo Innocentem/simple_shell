@@ -18,6 +18,7 @@ ssize_t buf_in(info_t *info, char **buf, size_t *len)
 	{
 		free(*buf);
 		*buf = NULL;
+	}
 		signal(SIGINT, sigintHandler);
 #if USE_GETLINE
 		t = getline(buf, &len_p, stdin);
@@ -34,10 +35,8 @@ ssize_t buf_in(info_t *info, char **buf, size_t *len)
 			info->linecount_flag = 1;
 			remove_comments(*buf);
 			build_history_list(info, *buf, info->histcount++);
-			{
-				*len = t;
-				info->cmd_buf = buf;
-			}
+			*len = t;
+			info->cmd_buf = buf;
 		}
 	}
 	return (t);
