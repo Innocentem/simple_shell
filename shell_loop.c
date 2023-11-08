@@ -14,14 +14,14 @@ int hsh(info_t *info, char **av)
 
 	while (r != -1 && builtin_ret != -2)
 	{
-		clear_info(info);
+		info_clear(info);
 		if (intuitive(info))
 			_puts("my$: ");
 		laputchar(BUF_FLUSH);
 		r = inpt_gt(info);
 		if (r != -1)
 		{
-			set_info(info, av);
+			info_set(info, av);
 			builtin_ret = find_builtin(info);
 			if (builtin_ret == -1)
 				find_cmd(info);
@@ -58,11 +58,11 @@ int find_inbuilt(info_t *info)
 	int i, built_in_ret = -1;
 	builtin_table inbuilttbl[] = {
 		{"exit", exiter},
-		{"env", _myenv},
+		{"env", my_envir},
 		{"help", _help},
 		{"history", _hstry},
-		{"setenv", _mysetenv},
-		{"unsetenv", _myunsetenv},
+		{"setenv", myset_env},
+		{"unsetenv", myunset_env},
 		{"cd", _cdr},
 		{"alias", _myal},
 		{NULL, NULL}
@@ -102,7 +102,7 @@ void find_cmd(info_t *info)
 	if (!k)
 		return;
 
-	path = find_path(info, _getenv(info, "PATH="), info->argv[0]);
+	path = find_path(info, get_envir(info, "PATH="), info->argv[0]);
 	if (path)
 	{
 		info->path = path;
@@ -110,7 +110,7 @@ void find_cmd(info_t *info)
 	}
 	else
 	{
-		if ((intuitive(info) || _getenv(info, "PATH=")
+		if ((intuitive(info) || get_envir(info, "PATH=")
 					|| info->argv[0][0] == '/') && is_cmd(info, info->argv[0]))
 			fork_cmd(info);
 		else if (*(info->arg) != '\n')
@@ -140,7 +140,7 @@ void fork_cmd(info_t *info)
 	}
 	if (child_pid == 0)
 	{
-		if (execve(info->path, info->argv, get_environ(info)) == -1)
+		if (execve(info->path, info->argv, _getenvir(info)) == -1)
 		{
 			free_info(info, 1);
 			if (errno == EACCES)

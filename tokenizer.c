@@ -1,10 +1,11 @@
 #include "shell.h"
 
 /**
- * **strtow - divides a string into words. repeatition of delimiters are ignored
- * @str: string input
- * @d:  delim string
- * Return:  pointer that points to an array of strings, or on failure NULL
+ * **strtow - to divide str into words,
+ * 	repeatition of delimiters are ignored
+ * @str: str inpt
+ * @d: delim str.
+ * Return:  ptr that points to an array of strngs, or on failure NULL
  */
 
 char **strtow(char *str, char *d)
@@ -17,7 +18,7 @@ char **strtow(char *str, char *d)
 	if (!d)
 		d = " ";
 	for (i = 0; str[i] != '\0'; i++)
-		if (!is_delim(str[i], d) && (is_delim(str[i + 1], d) || !str[i + 1]))
+		if (!if_delim(str[i], d) && (if_delim(str[i + 1], d) || !str[i + 1]))
 			numwords++;
 
 	if (numwords == 0)
@@ -27,10 +28,10 @@ char **strtow(char *str, char *d)
 		return (NULL);
 	for (i = 0, j = 0; j < numwords; j++)
 	{
-		while (is_delim(str[i], d))
+		while (if_delim(str[i], d))
 			i++;
 		k = 0;
-		while (!is_delim(str[i + k], d) && str[i + k])
+		while (!if_delim(str[i + k], d) && str[i + k])
 			k++;
 		s[j] = malloc((k + 1) * sizeof(char));
 		if (!s[j])
@@ -49,10 +50,10 @@ char **strtow(char *str, char *d)
 }
 
 /**
- * **strtow2 - divides a string into words
- * @str:  string input
- * @d:  delimeter
- * Return: a pointer that ponts to an array of strings, or NULL on failure
+ * **strtow2 - divide string into words
+ * @str:  string inpt
+ * @d:  delim.
+ * Return: pntr to an array of strings, or NULL on failure
  */
 char **strtow2(char *str, char d)
 {

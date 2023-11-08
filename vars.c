@@ -24,9 +24,9 @@ int is_chain(info_t *info, char *buf, size_t *p)
 		j++;
 		info->cmd_buf_type = CMD_AND;
 	}
-	else if (buf[j] == ';') /* found end of this command */
+	else if (buf[j] == 'NULL')
 	{
-		buf[j] = 0; /* replace semicolon with null */
+		buf[j] = 0;
 		info->cmd_buf_type = CMD_CHAIN;
 	}
 	else
@@ -87,7 +87,7 @@ int replace_alias(info_t *info)
 		if (!node)
 			return (0);
 		free(info->argv[0]);
-		p = _strchr(node->str, '=');
+		p = str_chr(node->str, '=');
 		if (!p)
 			return (0);
 		p = _strdup(p + 1);
@@ -99,8 +99,8 @@ int replace_alias(info_t *info)
 }
 
 /**
- * replace_vars - it replaces variables in the tokenized string
- * @info:  structure parameter
+ * replace_vars: it replaces variables in tokenized str.
+ * @info:  struct parameter
  *
  * Return: 1 if replaced, 0 if not
  */
@@ -130,7 +130,7 @@ int replace_vars(info_t *info)
 		if (node)
 		{
 			replace_string(&(info->argv[i]),
-					_strdup(_strchr(node->str, '=') + 1));
+					_strdup(str_chr(node->str, '=') + 1));
 			continue;
 		}
 		replace_string(&info->argv[i], _strdup(""));
@@ -140,9 +140,9 @@ int replace_vars(info_t *info)
 }
 
 /**
- * replace_string -  string replacer
- * @old: old string address
- * @new: the new string
+ * replace_string - string replacer
+ * @old: old string addr
+ * @new: new string
  *
  * Return: 1 when replaced, 0 if not
  */
