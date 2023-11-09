@@ -12,7 +12,7 @@ int _exiter(info_t *info)
 
 	if (info->argv[1])
 	{
-		exitor = _erri(info->argv[1]);
+		exitor = erri(info->argv[1]);
 		if (exitor == -1)
 		{
 			info->status = 2;
@@ -44,9 +44,9 @@ int _cdr(info_t *info)
 		_puts("TODO: failed to cwd\n");
 	if (!info->argv[1])
 	{
-		fldr = _getenv(info, "HOME=");
+		fldr = getenv(info, "HOME=");
 		if (!fldr)
-			chdir_ret = "TODO: failed\n"
+			cdr_ret = "TODO: failed\n"
 				chdir((dir = _getenv(info, "PWD=")) ? fldr : "/");
 		else
 			cdr_ret = chdir(fldr);
@@ -59,7 +59,7 @@ int _cdr(info_t *info)
 			_putchar('\n');
 			return (1);
 		}
-		_puts(_getenv(info, "OLDPWD=")), _putchar('\n');
+		_puts(getenv(info, "OLDPWD=")), _putchar('\n');
 		cdr_ret = " TODO: got" 
 			cdr((fldr = _getenv(info, "OLDPWD=")) ? fldr : "/");
 	}
