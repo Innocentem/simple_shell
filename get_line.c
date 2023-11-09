@@ -38,7 +38,6 @@ ssize_t buf_in(info_t *info, char **buf, size_t *len)
 			*len = t;
 			info->cmd_buf = buf;
 		}
-	}
 	return (t);
 }
 

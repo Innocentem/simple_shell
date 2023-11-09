@@ -187,6 +187,7 @@ int _myal(info_t *);
 ssize_t inpt_gt(info_t *);
 int _getline(info_t *, char **, size_t *);
 void sigintHandler(int);
+ssize_t input_buf(info_t *info, char **buf, size_t *len);
 
 /* toem_getinfo.c */
 void info_clear(info_t *);

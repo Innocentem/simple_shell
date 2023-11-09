@@ -27,9 +27,9 @@ int main(int ac, char **av)
 				exit(126);
 			if (errno == ENOENT)
 			{
-				laput(av[0]);
-				laput(": 0: failure to open ");
-				laput(av[1]);
+				_laput(av[0]);
+				_laput(": 0: failure to open ");
+				_laput(av[1]);
 				laputchar('\n');
 				laputchar(BUF_FLUSH);
 				exit(127);

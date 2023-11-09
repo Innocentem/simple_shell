@@ -61,8 +61,8 @@ int find_inbuilt(info_t *info)
 		{"env", my_envir},
 		{"help", _help},
 		{"history", _hstry},
-		{"setenv", myset_env},
-		{"unsetenv", myunset_env},
+		{"setenv", set_env},
+		{"unsetenv", unset_env},
 		{"cd", _cdr},
 		{"alias", _myal},
 		{NULL, NULL}
