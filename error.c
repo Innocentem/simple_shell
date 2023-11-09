@@ -37,8 +37,11 @@ int laputchar(char c)
 		write(2, buf, i);
 		i = 0;
 	}
+
 	if (c != BUF_FLUSH)
+	{
 		buf[i++] = c;
+	}
 		return (1);
 }
 
