@@ -17,7 +17,7 @@ void _laput(char *str)
 		laputchar(str[i]);
 		i++;
 	}
-										}
+}
 
 /**
 * laputchar - writes the character c to stderr
@@ -42,7 +42,7 @@ int laputchar(char c)
 	{
 		buf[i++] = c;
 	}
-		return (1);
+	return (1);
 }
 
 /**
@@ -68,8 +68,8 @@ int put_a(char c, int fd)
 	if (c != BUF_FLUSH)
 	{
 		buf[i++] = c;
-		return (1);
 	}
+	return (1);
 }
 
 /**
