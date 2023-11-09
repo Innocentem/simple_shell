@@ -59,6 +59,7 @@ int put_a(char c, int fd)
 	{
 		write(fd, buf, i);
 		i = 0;
+		return (1);
 	}
 
 	if (c != BUF_FLUSH)
