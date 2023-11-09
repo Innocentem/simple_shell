@@ -192,6 +192,7 @@ void sigintHandler(int);
 void info_clear(info_t *);
 void info_set(info_t *, char **);
 void info_free(info_t *, int);
+void remove_comments(char *str);
 
 /* toem_envir.c */
 char *get_envir(info_t *, const char *);
