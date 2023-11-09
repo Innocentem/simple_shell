@@ -36,46 +36,51 @@ int _exiter(info_t *info)
  */
 int _cdr(info_t *info)
 {
-	char *s, *fldr, buffer[1024];
-	int cdr_ret;
+    char *s, *fldr, buffer[1024];
+    int cdr_ret;
 
-	s = getcwd(buffer, 1024);
-	if (!s)
-		_puts("TODO: failed to cwd\n");
-	if (!info->argv[1])
-	{
-		fldr = getenv(info, "HOME=");
-		if (!fldr)
-			cdr_ret = "TODO: failed\n"
-				chdir((dir = _getenv(info, "PWD=")) ? fldr : "/");
-		else
-			cdr_ret = chdir(fldr);
-	}
-	else if (_strcmp(info->argv[1], "-") == 0)
-	{
-		if (!_getenv(info, "OLDPWD="))
-		{
-			_puts(s);
-			_putchar('\n');
-			return (1);
-		}
-		_puts(getenv(info, "OLDPWD=")), _putchar('\n');
-		cdr_ret = " TODO: got" 
-			cdr((fldr = _getenv(info, "OLDPWD=")) ? fldr : "/");
-	}
-	else
-		cdr_ret = cdr(info->argv[1]);
-	if (cdr_ret == -1)
-	{
-		errprnt(info, "can't cd to ");
-		_laput(info->argv[1]), _laputchar('\n');
-	}
-	else
-	{
-		_setenv(info, "OLDPWD", _getenv(info, "PWD="));
-		_setenv(info, "PWD", getcwd(buffer, 1024));
-	}
-	return (0);
+    s = getcwd(buffer, 1024);
+    if (!s)
+        _puts("TODO: failed to cwd\n");
+
+    if (!info->argv[1])
+    {
+        fldr = getenv("HOME");
+        if (!fldr)
+            cdr_ret = chdir((dir = _getenv(info, "PWD=")) ? fldr : "/");
+        else
+            cdr_ret = chdir(fldr);
+    }
+    else if (_strcmp(info->argv[1], "-") == 0)
+    {
+        if (!_getenv(info, "OLDPWD="))
+        {
+            _puts(s);
+            _putchar('\n');
+            return 1;
+        }
+        _puts(getenv("OLDPWD"));
+        _putchar('\n');
+        cdr_ret = chdir((_getenv(info, "OLDPWD=")) ? _getenv(info, "OLDPWD=") : "/");
+    }
+    else
+    {
+        cdr_ret = cdr(info->argv[1]);
+    }
+
+    if (cdr_ret == -1)
+    {
+        errprnt(info, "can't cd to ");
+        _laput(info->argv[1]);
+        _laputchar('\n');
+    }
+    else
+    {
+        _setenv(info, "OLDPWD", _getenv(info, "PWD="));
+        _setenv(info, "PWD", getcwd(buffer, 1024));
+    }
+
+    return 0;
 }
 
 /**
