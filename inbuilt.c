@@ -47,7 +47,7 @@ int _cdr(info_t *info)
     {
         fldr = getenv("HOME");
         if (!fldr)
-            cdr_ret = chdir((dir = _getenv(info, "PWD=")) ? fldr : "/");
+            cdr_ret = chdir((div = getenv(info, "PWD=")) ? fldr : "/");
         else
             cdr_ret = chdir(fldr);
     }
@@ -65,19 +65,19 @@ int _cdr(info_t *info)
     }
     else
     {
-        cdr_ret = cdr(info->argv[1]);
+        cdr_ret = _cdr(info->argv[1]);
     }
 
     if (cdr_ret == -1)
     {
         errprnt(info, "can't cd to ");
         _laput(info->argv[1]);
-        _laputchar('\n');
+        laputchar('\n');
     }
     else
     {
-        _setenv(info, "OLDPWD", _getenv(info, "PWD="));
-        _setenv(info, "PWD", getcwd(buffer, 1024));
+        setenv(info, "OLDPWD", _getenv(info, "PWD="));
+        setenv(info, "PWD", getcwd(buffer, 1024));
     }
 
     return 0;
