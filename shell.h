@@ -15,7 +15,11 @@
 /* read/write buffers */
 #define READ_BUF_SIZE 1024
 #define WRITE_BUF_SIZE 1024
+
 #define BUF_FLUSH -1
+char buf[20];
+snprintf(buf, sizeof(buf), "%d", BUF_FLUSH);
+write(fd, buf, strlen(buf));
 
 /* cmmnd chaining */
 #define CMD_NORM	0
