@@ -6,7 +6,7 @@
  * Return: allocated string containg history file.
  */
 
-char *get_history_file(info_t *info)
+char *get_history_file(void)
 {
 	char *buf, *dir;
 
@@ -34,7 +34,7 @@ char *get_history_file(info_t *info)
 int write_history(void)
 {
 	ssize_t fd;
-	char *filename = get_history_file(info);
+	char *filename = get_history_file(info_t);
 	list_t *node = NULL;
 
 	if (!filename)
@@ -46,7 +46,7 @@ int write_history(void)
 		return (-1);
 	for (node = info->history; node; node = node->next)
 	{
-		write(fd, strlen(node->str);
+		write(fd, strlen(node->str));
 		write(fd, "\n", 1);
 	}
 	write(fd, BUF_FLUSH, strlen(BUF_FLUSH));
