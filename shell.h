@@ -1,6 +1,11 @@
 #ifndef _SHELL_H_
 #define _SHELL_H_
 
+/* read/write buffers */
+#define BUF_FLUSH 0
+#define READ_BUF_SIZE 1024
+#define WRITE_BUF_SIZE 1024
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -11,11 +16,6 @@
 #include <limits.h>
 #include <fcntl.h>
 #include <errno.h>
-
-/* read/write buffers */
-#define READ_BUF_SIZE 1024
-#define WRITE_BUF_SIZE 1024
-#define BUF_FLUSH
 
 /* cmmnd chaining */
 #define CMD_NORM	0
@@ -235,5 +235,13 @@ void check_chain(info_t *, char *, size_t *, size_t, size_t);
 int replace_alias(info_t *);
 int replace_vars(info_t *);
 int replace_string(char **, char *);
+
+/*forbuf*/
+void for_buf(int fd)
+{
+        char buf[64];
+        snprintf(buf, sizeof(buf), "%d", BUF_FLUSH);
+        write(fd, buf, strlen(buf));
+}
 
 #endif
