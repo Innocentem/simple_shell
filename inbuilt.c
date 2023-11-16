@@ -53,7 +53,7 @@ int _cdr(info_t *info)
     }
     else if (_strcmp(info->argv[1], "-") == 0)
     {
-        if (!_getenv(info, "OLDPWD="))
+        if (!getenv(info, "OLDPWD="))
         {
             _puts(s);
             _putchar('\n');
