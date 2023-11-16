@@ -32,30 +32,35 @@ info->path = getenv("HOME");
 
 int write_history(info_t *info)
 {
-	ssize_t fd;
-	char *filename = get_history_file(info);
-	list_t *node = NULL;
+    ssize_t fd;
+    char *filename = get_history_file(info);
+    list_t *node = NULL;
 
-	if (!filename)
-		return (-1);
+    if (!filename) {
+        return -1;
+    }
 
-	fd = open(filename, O_CREAT | O_TRUNC | O_RDWR, 0644);
-	free(filename);
-	if (fd == -1)
-		return (-1);
+    fd = open(filename, O_CREAT | O_TRUNC | O_RDWR, 0644);
+    free(filename);
 
-	for (node = info->history; node; node = node->next)
-	{
-		write(fd, node->str, strlen(node->str));
-		write(fd, "\n", 1);
-	}
+    if (fd == -1) {
+        perror("open");
+        return -1;
+    }
 
-	for_buf(fd);
+    for (node = info->history; node; node = node->next)
+    {
+        if (node->str != NULL) {
+            write(fd, node->str, strlen(node->str));
+            write(fd, "\n", 1);
+        }
+    }
 
-	write(fd, BUF_FLUSH, strlen(BUF_FLUSH));
-	close(fd);
+    write(fd, BUF_FLUSH, strlen(BUF_FLUSH));
 
-	return (1);
+    close(fd);
+
+    return 1;
 }
 
 /**
