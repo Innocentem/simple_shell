@@ -75,6 +75,7 @@ typedef struct liststr
 typedef struct passinfo
 {
 	char *arg;
+	char *info;
 	char **argv;
 	char *path;
 	int argc;
