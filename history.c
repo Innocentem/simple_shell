@@ -6,7 +6,7 @@
  * Return: allocated string containg history file.
  */
 
-char *get_history_file(void)
+char *get_history_file(info_t *info)
 {
 	char *buf, *dir;
 
@@ -31,7 +31,7 @@ char *get_history_file(void)
  * Return: success 1, failure -1.
  */
 
-int write_history(void)
+int write_history(info_t *info)
 {
 	ssize_t fd;
 	char *filename = get_history_file(info_t);
