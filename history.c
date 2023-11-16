@@ -29,6 +29,12 @@ info->path = getenv("HOME");
  *
  * Return: success 1, failure -1.
  */
+void for_buf(int fd)
+{
+        char buf[64];
+	snprintf(buf, sizeof(buf), "%d", BUF_FLUSH);
+	write(fd, buf, strlen(buf));
+}
 
 int write_history(info_t *info)
 {
