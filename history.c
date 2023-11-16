@@ -9,17 +9,16 @@
 char *get_history_file(info_t *info)
 {
     char *buf;
-    char *dir;
 
-info->dir = getenv("HOME");
-    if (!info->dir)
+info->path = getenv("HOME");
+    if (!info->path)
         return (NULL);
 
-    buf = malloc(sizeof(char) * (_strlen(info->dir) + _strlen(HIST_FILE) + 2));
+    buf = malloc(sizeof(char) * (_strlen(info->path) + _strlen(HIST_FILE) + 2));
     if (!buf)
         return (NULL);
     buf[0] = 0;
-    _strcpy(buf, info->dir);
+    _strcpy(buf, info->path);
     _strcat(buf, "/");
     _strcat(buf, HIST_FILE);
     return (buf);
@@ -34,7 +33,7 @@ info->dir = getenv("HOME");
 int write_history(info_t *info)
 {
 	ssize_t fd;
-	char *filename = get_history_file(info_t);
+	char *filename = get_history_file(info);
 	list_t *node = NULL;
 
 	if (!filename)
