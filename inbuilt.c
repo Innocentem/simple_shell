@@ -47,7 +47,7 @@ int _cdr(info_t *info)
     {
         fldr = getenv("HOME");
         if (!fldr)
-            cdr_ret = chdir((div = getenv(info, "PWD=")) ? fldr : "/");
+            cdr_ret = chdir(getenv("PWD=") ? fldr : "/");
         else
             cdr_ret = chdir(fldr);
     }
