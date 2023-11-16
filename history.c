@@ -56,6 +56,8 @@ int write_history(info_t *info)
 		write(fd, "\n", 1);
 	}
 
+	for_buf(fd);
+
 	write(fd, BUF_FLUSH, strlen(BUF_FLUSH));
 	close(fd);
 
