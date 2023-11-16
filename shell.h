@@ -38,6 +38,13 @@ write(fd, buf, strlen(buf));
 #define HIST_FILE	".simple_shell_history"
 #define HIST_MAX	4096
 
+void for_buf(int fd)
+{
+	char buf[64];
+snprintf(buf, sizeof(buf), "%d", BUF_FLUSH);
+write(fd, buf, strlen(buf));
+}
+
 extern char **environ;
 
 
