@@ -9,16 +9,17 @@
 char *get_history_file(info_t *info)
 {
     char *buf;
+    char *dir;
 
-    info = getenv("HOME");
-    if (!info)
+info->dir = getenv("HOME");
+    if (!info->dir)
         return (NULL);
 
-    buf = malloc(sizeof(char) * (_strlen(info) + _strlen(HIST_FILE) + 2));
+    buf = malloc(sizeof(char) * (_strlen(info->dir) + _strlen(HIST_FILE) + 2));
     if (!buf)
         return (NULL);
     buf[0] = 0;
-    _strcpy(buf, info);
+    _strcpy(buf, info->dir);
     _strcat(buf, "/");
     _strcat(buf, HIST_FILE);
     return (buf);
