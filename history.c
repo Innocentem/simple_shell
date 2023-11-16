@@ -29,12 +29,13 @@ info->path = getenv("HOME");
  *
  * Return: success 1, failure -1.
  */
-
 int write_history(info_t *info)
 {
     ssize_t fd;
     char *filename = get_history_file(info);
     list_t *node = NULL;
+    ssize_t newline_written;
+    (void)newline_written;
 
     if (!filename) {
         return -1;
@@ -51,18 +52,18 @@ int write_history(info_t *info)
     for (node = info->history; node; node = node->next)
     {
         if (node->str != NULL) {
-            write(fd, node->str, strlen(node->str));
+            newline_written = write(fd, node->str, strlen(node->str));
             write(fd, "\n", 1);
         }
     }
 
-    write(fd, BUF_FLUSH, strlen(BUF_FLUSH));
+    write(fd, BUF_FLUSH, sizeof(BUF_FLUSH));
 
     close(fd);
 
     return 1;
 }
-
+                
 /**
  * read_history: to read history
  * @info - struct parameter.
