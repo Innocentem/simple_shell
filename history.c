@@ -10,7 +10,7 @@ char *get_history_file(info_t *info)
 {
     char *buf;
 
-    dir = getenv("HOME");
+    info = getenv("HOME");
     if (!info)
         return (NULL);
 
