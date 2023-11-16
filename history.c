@@ -31,7 +31,7 @@ char *get_history_file(info_t *info)
  * Return: success 1, failure -1.
  */
 
-int write_history(info_t *info)
+int write_history(void)
 {
 	ssize_t fd;
 	char *filename = get_history_file(info);
@@ -46,10 +46,10 @@ int write_history(info_t *info)
 		return (-1);
 	for (node = info->history; node; node = node->next)
 	{
-		_puts(node->str, fd);
-		_puts("\n", fd);
+		write(fd, strlen(node->str);
+		write(fd, "\n", 1);
 	}
-	_puts(BUF_FLUSH, fd);
+	write(fd, BUF_FLUSH, strlen(BUF_FLUSH));
 	close(fd);
 	return (1);
 }
