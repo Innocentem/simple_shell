@@ -44,13 +44,16 @@ int write_history(void)
 	free(filename);
 	if (fd == -1)
 		return (-1);
+
 	for (node = info->history; node; node = node->next)
 	{
-		write(fd, strlen(node->str));
+		write(fd, node->str, strlen(node->str));
 		write(fd, "\n", 1);
 	}
+
 	write(fd, BUF_FLUSH, strlen(BUF_FLUSH));
 	close(fd);
+
 	return (1);
 }
 
