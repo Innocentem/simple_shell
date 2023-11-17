@@ -26,7 +26,7 @@ int _strlen(char *s)
  * Return: postv s1 > s2, zero if s1 == s2, -ve if s1 < s2.
  */
 
-int _strcmp(char *s1, char *s2)
+int _strcmp(const char *s1, const char *s2)
 {
 	while (*s1 && *s2)
 	{

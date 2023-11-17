@@ -78,27 +78,47 @@ typedef struct passinfo
 	char *info;
 	char **argv;
 	char *path;
-	int argc;
-	unsigned int line_count;
-	int err_num;
-	int linecount_flag;
 	char *fname;
+        char **environ;
+        char *cmd_buf;
+	unsigned int line_count;
+	int argc;
+        int value;
+	int err_num;
+	int env_changed;
+        int status;
+        int cdr_ret;
+	int linecount_flag;
+	int cmd_buf_type;
+        int readfd;
+        int histcount;
 	list_t *env;
 	list_t *history;
 	list_t *alias;
-	char **environ;
-	int env_changed;
-	int status;
-
-	char *cmd_buf; /* pointer to cmd ; chain buffer, for memory mangement */
-	int cmd_buf_type; /* CMD_type ||, &&, ; */
-	int readfd;
-	int histcount;
 } info_t;
-
-#define INFO_INIT \
-{NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
-		0, 0, 0}
+#define INFO_INIT { \
+    NULL,   /* .arg */ \
+    NULL,   /* .info */ \
+    NULL,   /* .argv */ \
+    NULL,   /* .path */ \
+    NULL,   /* .fname */ \
+    NULL,   /* .environ */ \
+    NULL,   /* .cmd_buf */ \
+    0,      /* .line_count */ \
+    0,      /* .argc */ \
+    0,      /* .value */ \
+    0,      /* .err_num */ \
+    0,      /* .env_changed */ \
+    0,      /* .status */ \
+    0,      /* .cdr_ret */ \
+    0,      /* .linecount_flag */ \
+    0,      /* .cmd_buf_type */ \
+    0,      /* .readfd */ \
+    0,      /* .histcount */ \
+    NULL,   /* .env */ \
+    NULL,   /* .history */ \
+    NULL    /* .alias */ \
+}
 
 /**
  * struct builtin - containing a builtin strng and related function
@@ -118,6 +138,7 @@ int hsh(info_t *, char **);
 int find_builtin(info_t *);
 void find_cmd(info_t *);
 void fork_cmd(info_t *);
+void free_info(info_t *info, int flag);
 
 /* toem_parser.c */
 int is_cmd(info_t *, char *);

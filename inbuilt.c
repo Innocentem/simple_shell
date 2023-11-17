@@ -65,13 +65,11 @@ int _cdr(info_t *info)
     }
     else
     {
-	 info_t just
-	 {
-	cdr_ret = _cdr(&just);
-    	_cdr(info_t *info);
-	just.info = info->argv[1];
-	 }
-        cdr_ret = _cdr(info->argv[1]);
+        info_t just;
+        just.cdr_ret = _cdr(&just);
+        just.info = info->argv[1];
+
+        cdr_ret = _cdr(&just);
     }
 
     if (cdr_ret == -1)
@@ -82,8 +80,8 @@ int _cdr(info_t *info)
     }
     else
     {
-        setenv(info, "OLDPWD", getenv(info, "PWD="));
-        setenv(info, "PWD", getcwd(buffer, 1024));
+        setenv("OLDPWD", getenv("PWD"), 1);
+        setenv("PWD", getcwd(buffer, 1024), 1);
     }
 
     return 0;

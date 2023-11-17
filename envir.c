@@ -64,17 +64,18 @@ int my_setenv(info_t *info)
 
 int my_unsetenv(info_t *info)
 {
-	int i;
+    int i;
 
-	if (info->argc == 1)
-	{
-		_laput("Too few arguements.\n");
-		return (1);
-	}
-	for (i = 1; i <= info->argc; i++)
-		unset_env(info, info->argv[i]);
+    if (*info->arg == 1)
+    {
+        _laput("Too few arguments.\n");
+        return 1;
+    }
 
-	return (0);
+    for (i = 1; i <= *info->arg; i++)
+        unset_env(info, info->argv[i]);
+
+    return 0;
 }
 
 /**
