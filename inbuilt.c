@@ -47,13 +47,13 @@ int _cdr(info_t *info)
     {
         fldr = getenv("HOME");
         if (!fldr)
-            cdr_ret = chdir(getenv("PWD=") ? fldr : "/");
+            cdr_ret = chdir(getenv("PWD") ? fldr : "/");
         else
             cdr_ret = chdir(fldr);
     }
     else if (_strcmp(info->argv[1], "-") == 0)
     {
-        if (!getenv(info, "OLDPWD="))
+        if (!getenv("OLDPWD="))
         {
             _puts(s);
             _putchar('\n');
@@ -61,11 +61,11 @@ int _cdr(info_t *info)
         }
         _puts(getenv("OLDPWD"));
         _putchar('\n');
-        cdr_ret = chdir((_getenv(info, "OLDPWD=")) ? _getenv(info, "OLDPWD=") : "/");
+        cdr_ret = chdir(getenv("OLDPWD") ? getenv("OLDPWD"): "/");
     }
     else
     {
-        cdr_ret = _cdr(info->argv[1]);
+	cdr_ret = _cdr(info->argv[1]);
     }
 
     if (cdr_ret == -1)
@@ -76,7 +76,7 @@ int _cdr(info_t *info)
     }
     else
     {
-        setenv(info, "OLDPWD", _getenv(info, "PWD="));
+        setenv(info, "OLDPWD", getenv(info, "PWD="));
         setenv(info, "PWD", getcwd(buffer, 1024));
     }
 
