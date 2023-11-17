@@ -65,7 +65,13 @@ int _cdr(info_t *info)
     }
     else
     {
-	cdr_ret = _cdr(info->argv[1]);
+	 info_t just
+	 {
+	cdr_ret = _cdr(&just);
+    	_cdr(info_t *info);
+	just.info = info->argv[1];
+	 }
+        cdr_ret = _cdr(info->argv[1]);
     }
 
     if (cdr_ret == -1)

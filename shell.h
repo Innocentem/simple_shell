@@ -135,7 +135,7 @@ int la_puta(char *str, int fd);
 
 /* toem_string.c */
 int _strlen(char *);
-int _strcmp(char *, char *);
+int _strcmp(const char *, const char *);
 char *starts_with(const char *, const char *);
 char *_strcat(char *, char *);
 
@@ -177,7 +177,7 @@ void _comrmv(char *);
 
 /* toem_inbuilt.c */
 int exiter(info_t *);
-int _cdr(info_t *);
+int _cdr(info_t *info);
 int _help(info_t *);
 
 /* toem__builtin.c */
